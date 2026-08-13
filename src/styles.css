@@ -9,3 +9,17 @@
 @media(max-width:1100px){.app-shell{grid-template-columns:180px 1fr}.plan-panel{grid-column:1/-1;position:static;height:auto;border-left:0;border-top:1px solid var(--line);padding:30px clamp(24px,4vw,60px)}.plan-panel ul{display:grid;grid-template-columns:repeat(2,1fr);gap:0 20px}.plan-panel .button,.panel-button{max-width:340px}}
 @media(max-width:720px){.app-shell{display:block}.app-sidebar{padding:16px}.app-title{padding-bottom:14px}.app-sidebar nav{flex-direction:row;overflow:auto;padding-bottom:5px}.app-sidebar nav button{white-space:nowrap;gap:9px}.local-note{display:none}.app-workspace{padding:30px 16px}.app-bar{align-items:flex-start}.selection-count{flex-direction:column;align-items:flex-end}.tweak-list article{padding:15px;grid-template-columns:41px 1fr}.plan-panel{padding:28px 16px}.plan-panel ul{grid-template-columns:1fr}.plan-panel .button,.panel-button{max-width:none}}
 .auth-page{min-height:70vh;display:grid;place-items:center;padding:60px 20px}.header [data-slot="avatar"]{width:34px;height:34px}
+
+/* Apex owns the public canvas; Neon Auth's dark-mode body token must not leak globally. */
+html,body,#root{background:#f4f1ea;color:#101216;color-scheme:light}
+body{margin:0;min-width:320px}
+button,input,select,textarea{color:#101216}
+.header,.hero,.section,.page-hero,.workflow,.catalog,.faq,.support,.legal,.app-workspace,.plan-panel{color:#101216}
+.header .brand,.header .nav a:not(.button){color:#34363a}
+.header .nav a:hover,.header .nav a.active{color:#d93f24}
+.hero h1{color:#101216}.hero h1 em{color:#e9472c}
+.hero .text-link{color:#34363a}
+.pill{color:#3f423f}
+.app-workspace h1,.app-workspace h2,.app-workspace p,.app-workspace summary,.plan-panel h2,.plan-panel li{color:#202328}
+.app-sidebar,.app-sidebar button,.dark-cta,.trust,.console-card,footer{color:#fff}
+.auth-page{--neon-background:#fff;--neon-foreground:#17191d;--neon-card:#fff;--neon-card-foreground:#17191d;--neon-popover:#fff;--neon-popover-foreground:#17191d;--neon-muted:#eeeae2;--neon-muted-foreground:#64645f;--neon-border:#d2cdc3}
