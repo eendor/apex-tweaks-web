@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useLayoutEffect, useState, type FormEvent } from "react";
 import {
   Routes,
   Route,
@@ -1143,10 +1143,15 @@ function NotFound() {
 }
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => {
+  useLayoutEffect(() => {
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
-    requestAnimationFrame(() => window.scrollTo(0, 0));
+    const first = requestAnimationFrame(() => window.scrollTo(0, 0));
+    const second = setTimeout(() => window.scrollTo(0, 0), 0);
+    return () => {
+      cancelAnimationFrame(first);
+      clearTimeout(second);
+    };
   }, [pathname]);
   return null;
 }
