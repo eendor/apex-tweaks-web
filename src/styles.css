@@ -42,3 +42,25 @@ html,body,#root{background:var(--spectrum-gray-50);color:var(--spectrum-gray-900
 .support input,.support select,.support textarea{border-radius:6px;border-color:var(--spectrum-gray-500)}footer{background:var(--spectrum-gray-900)}
 @media(max-width:900px){.nav{top:64px;background:var(--spectrum-gray-50);box-shadow:0 8px 16px #0002}.feature-grid{gap:12px}}
 @media(max-width:600px){.header{height:56px}.nav{top:56px}.button{min-height:48px;border-radius:24px}.hero{padding-top:56px}.hero h1{font-size:48px}.app-sidebar nav button{min-height:44px}.tweak-toggle{width:40px;height:24px}.tweak-toggle i{width:20px;height:20px}.selected .tweak-toggle i{transform:translateX(16px)}}
+
+/* Apex brand accent within Spectrum's semantic token model. */
+.spectrum{--spectrum-accent-background-color-default:#e34829;--spectrum-accent-background-color-hover:#c9250d;--spectrum-accent-background-color-down:#a61b08;--spectrum-accent-content-color-default:#c9250d;--spectrum-focus-indicator-color:#e34829}
+.spectrum--dark{--spectrum-accent-background-color-default:#f55f44;--spectrum-accent-background-color-hover:#ff7c65;--spectrum-accent-background-color-down:#d63c22;--spectrum-accent-content-color-default:#ff7c65;--spectrum-focus-indicator-color:#ff7c65}
+.theme-toggle{width:34px;height:34px;border:0;border-radius:50%;background:transparent;display:grid;place-items:center;cursor:pointer;color:var(--spectrum-gray-800);flex:none}.theme-toggle:hover{background:var(--spectrum-gray-200)}.theme-toggle svg{width:18px;height:18px}
+.brand>span:first-child,.app-title>span{background:var(--spectrum-accent-background-color-default)}
+.hero h1 em,.score,.eyebrow,.hero .text-link,.feature-card>svg{color:var(--spectrum-accent-content-color-default)}
+.console-card .eyebrow,.console-card .score{color:#ff7c65}.scan i{background:var(--spectrum-accent-background-color-default)}
+.feature-card.accent-card{background:#fff0ed;border-color:#f7b0a3}.feature-card.accent-card svg{color:#c9250d}
+.dark-cta{background:#a61b08}.tabs button[aria-selected=true],.selected .tweak-toggle{background:var(--spectrum-accent-background-color-default);border-color:var(--spectrum-accent-background-color-default)}.tweak-list article.selected{border-color:var(--spectrum-accent-background-color-default);box-shadow:inset 3px 0 var(--spectrum-accent-background-color-default)}
+
+/* Spectrum dark context: layered surfaces, semantic contrast, no inversion tricks. */
+.spectrum--dark body,.spectrum--dark #root{background:var(--spectrum-gray-50);color:var(--spectrum-gray-900)}
+.spectrum--dark .header,.spectrum--dark .hero,.spectrum--dark .section,.spectrum--dark .page-hero,.spectrum--dark .catalog,.spectrum--dark .faq,.spectrum--dark .support,.spectrum--dark .legal,.spectrum--dark .plan-panel{background:var(--spectrum-gray-75);color:var(--spectrum-gray-900);border-color:var(--spectrum-gray-300)}
+.spectrum--dark .header .brand,.spectrum--dark .header .nav a:not(.button),.spectrum--dark .hero h1,.spectrum--dark .hero .text-link,.spectrum--dark .app-workspace h1,.spectrum--dark .app-workspace h2,.spectrum--dark .app-workspace p,.spectrum--dark .app-workspace summary,.spectrum--dark .plan-panel h2,.spectrum--dark .plan-panel li{color:var(--spectrum-gray-900)}
+.spectrum--dark .lead,.spectrum--dark .section-head p,.spectrum--dark .page-hero p,.spectrum--dark .feature-card p,.spectrum--dark .micro{color:var(--spectrum-gray-700)}
+.spectrum--dark .pill,.spectrum--dark .feature-card,.spectrum--dark .catalog-grid article,.spectrum--dark .price-card,.spectrum--dark .tweak-list article,.spectrum--dark .app-search,.spectrum--dark .search,.spectrum--dark .profile-row button,.spectrum--dark .tabs button{background:var(--spectrum-gray-100);color:var(--spectrum-gray-900);border-color:var(--spectrum-gray-300)}
+.spectrum--dark .feature-card.accent-card{background:#40160f;border-color:#8f2c19}.spectrum--dark .feature-card.accent-card p,.spectrum--dark .feature-card.accent-card svg{color:#ffb7aa}
+.spectrum--dark .app-shell,.spectrum--dark .app-workspace,.spectrum--dark .workflow{background:var(--spectrum-gray-50)}
+.spectrum--dark .app-sidebar,.spectrum--dark footer,.spectrum--dark .trust,.spectrum--dark .console-card{background:#111;color:#fff}
+.spectrum--dark .web-warning,.spectrum--dark .plan-risk{background:#3d2a08;border-color:#8e6500}.spectrum--dark .web-warning p,.spectrum--dark .plan-risk p{color:#ffd875}
+.spectrum--dark .nav.open{background:var(--spectrum-gray-75)}

@@ -1,6 +1,18 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { Routes, Route, Link, NavLink, useLocation, useParams } from "react-router-dom";
-import { AuthView, SignedIn, SignedOut, UserButton } from "@neondatabase/auth/react/ui";
+import {
+  Routes,
+  Route,
+  Link,
+  NavLink,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import {
+  AuthView,
+  SignedIn,
+  SignedOut,
+  UserButton,
+} from "@neondatabase/auth/react/ui";
 import {
   ArrowRight,
   Check,
@@ -16,6 +28,8 @@ import {
   RotateCcw,
   AlertTriangle,
   Info,
+  Sun,
+  Moon,
 } from "lucide-react";
 import { features, catalog } from "./data";
 
@@ -31,8 +45,19 @@ const api = async (path: string, body: unknown) => {
 };
 function Header() {
   const [open, setOpen] = useState(false);
+  const [dark, setDark] = useState(() =>
+    localStorage.getItem("apex-theme")
+      ? localStorage.getItem("apex-theme") === "dark"
+      : matchMedia("(prefers-color-scheme: dark)").matches,
+  );
   const loc = useLocation();
   useEffect(() => setOpen(false), [loc]);
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.toggle("spectrum--dark", dark);
+    root.classList.toggle("spectrum--light", !dark);
+    localStorage.setItem("apex-theme", dark ? "dark" : "light");
+  }, [dark]);
   return (
     <header className="header">
       <Link className="brand" to="/" aria-label="Apex Tweaks home">
@@ -55,8 +80,20 @@ function Header() {
         <NavLink to="/pricing">Pricing</NavLink>
         <NavLink to="/safety">Safety</NavLink>
         <NavLink to="/support">Support</NavLink>
-        <SignedOut><Link to="/auth/sign-in">Sign in</Link></SignedOut>
-        <SignedIn><UserButton /></SignedIn>
+        <SignedOut>
+          <Link to="/auth/sign-in">Sign in</Link>
+        </SignedOut>
+        <SignedIn>
+          <UserButton />
+        </SignedIn>
+        <button
+          className="theme-toggle"
+          onClick={() => setDark((value) => !value)}
+          aria-label={dark ? "Use light theme" : "Use dark theme"}
+          title={dark ? "Use light theme" : "Use dark theme"}
+        >
+          {dark ? <Sun /> : <Moon />}
+        </button>
         <Link className="button small" to="/app">
           Open tweaker <ArrowRight size={15} />
         </Link>
@@ -687,18 +724,29 @@ function WebTweaker() {
   const download = async () => {
     setNotice("Preparing your Apex Runner…");
     const response = await fetch("/ApexTweaksRunner.exe");
-    if (!response.ok) { setNotice("Runner download is temporarily unavailable."); return; }
+    if (!response.ok) {
+      setNotice("Runner download is temporarily unavailable.");
+      return;
+    }
     const executable = await response.arrayBuffer();
     const marker = new TextEncoder().encode("\n--APEX-TWEAKS-PLAN-V1--\n");
-    const plan = new TextEncoder().encode(JSON.stringify({tweaks:chosen.map(({name,apply,undo})=>({name,apply,undo}))}));
-    const blob = new Blob([executable, marker, plan], { type: "application/vnd.microsoft.portable-executable" });
+    const plan = new TextEncoder().encode(
+      JSON.stringify({
+        tweaks: chosen.map(({ name, apply, undo }) => ({ name, apply, undo })),
+      }),
+    );
+    const blob = new Blob([executable, marker, plan], {
+      type: "application/vnd.microsoft.portable-executable",
+    });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
     a.download = "ApexTweaks-Runner.exe";
     a.click();
     URL.revokeObjectURL(url);
-    setNotice("Apex Runner downloaded. Open it to review, apply, or roll back this plan.");
+    setNotice(
+      "Apex Runner downloaded. Open it to review, apply, or roll back this plan.",
+    );
   };
   return (
     <Layout>
@@ -854,7 +902,10 @@ function WebTweaker() {
             <Download />
             Download Apex Runner
           </button>
-          <p className="runner-note">Windows may show SmartScreen because this preview executable is not yet code-signed. Only use the copy downloaded from this site.</p>
+          <p className="runner-note">
+            Windows may show SmartScreen because this preview executable is not
+            yet code-signed. Only use the copy downloaded from this site.
+          </p>
           <p className="plan-status" role="status">
             {notice}
           </p>
@@ -966,7 +1017,9 @@ function Support() {
           </p>
           <h3>Security issues</h3>
           <p>
-            Email <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>. Please do not publish an unpatched vulnerability.
+            Email{" "}
+            <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>.
+            Please do not publish an unpatched vulnerability.
           </p>
         </aside>
       </section>
@@ -1045,7 +1098,8 @@ function Legal({ terms = false }: { terms?: boolean }) {
             <p>
               Support records are retained only while operationally necessary.
               You may request access or deletion by emailing
-              <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>.
+              <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>
+              .
             </p>
             <h2>Cookies</h2>
             <p>
@@ -1056,13 +1110,23 @@ function Legal({ terms = false }: { terms?: boolean }) {
         )}
         <h2>Contact</h2>
         <p>
-          Questions can be sent to <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>.
+          Questions can be sent to{" "}
+          <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>.
         </p>
       </article>
     </Layout>
   );
 }
-function AuthPage(){const {pathname}=useParams();return <Layout><section className="auth-page"><AuthView pathname={pathname}/></section></Layout>}
+function AuthPage() {
+  const { pathname } = useParams();
+  return (
+    <Layout>
+      <section className="auth-page">
+        <AuthView pathname={pathname} />
+      </section>
+    </Layout>
+  );
+}
 function NotFound() {
   return (
     <Layout>
