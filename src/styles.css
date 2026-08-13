@@ -78,3 +78,9 @@ html,body,#root{background:var(--spectrum-gray-50);color:var(--spectrum-gray-900
 .spectrum--dark .support :is(input,select,textarea){background:var(--spectrum-gray-100);border-color:var(--spectrum-gray-400);color:var(--spectrum-gray-900)}
 .spectrum--dark .support :is(input,textarea)::placeholder{color:var(--spectrum-gray-600)}
 footer .muted-brand{color:#b7b7b7}
+.spectrum--dark .app-search input{color:#f2f2f2;background:transparent;caret-color:#ff7c65}
+.spectrum--dark .app-search input::placeholder{color:#a7a7a7;opacity:1}
+.spectrum--dark .app-search svg{color:#a7a7a7}
+.spectrum--dark .app-sidebar nav button.active{background:#2d2d2d;color:#fff;box-shadow:inset 3px 0 #f55f44}
+.spectrum--dark .app-sidebar nav button.active span{color:#c8c8c8}
+.spectrum--dark .app-sidebar nav button:hover:not(.active){background:#232323;color:#fff}
