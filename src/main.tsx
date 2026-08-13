@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
+import '@spectrum-css/tokens/dist/css/index.css';
 import '@neondatabase/auth/ui/css';
 import './styles.css';
 import { Providers } from './providers';
