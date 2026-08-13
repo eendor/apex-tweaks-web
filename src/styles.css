@@ -64,3 +64,17 @@ html,body,#root{background:var(--spectrum-gray-50);color:var(--spectrum-gray-900
 .spectrum--dark .app-sidebar,.spectrum--dark footer,.spectrum--dark .trust,.spectrum--dark .console-card{background:#111;color:#fff}
 .spectrum--dark .web-warning,.spectrum--dark .plan-risk{background:#3d2a08;border-color:#8e6500}.spectrum--dark .web-warning p,.spectrum--dark .plan-risk p{color:#ffd875}
 .spectrum--dark .nav.open{background:var(--spectrum-gray-75)}
+
+/* Complete dark-theme content coverage. */
+.spectrum--dark main :is(h1,h2,h3,h4,h5,h6,summary,strong,b){color:var(--spectrum-gray-900)}
+.spectrum--dark main :is(p,li,small,label){color:var(--spectrum-gray-700)}
+.spectrum--dark :is(.console-card,.app-sidebar,.dark-cta,.trust,footer) :is(h1,h2,h3,h4,h5,h6,summary,strong,b){color:#fff}
+.spectrum--dark :is(.console-card,.app-sidebar,.dark-cta,.trust,footer) :is(p,li,small,label){color:#b7b7b7}
+.spectrum--dark .steps,.spectrum--dark .safety-grid{border-color:var(--spectrum-gray-400)}
+.spectrum--dark .steps h3,.spectrum--dark .safety-grid h3{color:var(--spectrum-gray-900)}
+.spectrum--dark .notice{background:var(--spectrum-gray-100);color:var(--spectrum-gray-900);border:1px solid var(--spectrum-gray-300)}
+.spectrum--dark .notice h2{color:var(--spectrum-gray-900)}.spectrum--dark .notice p{color:var(--spectrum-gray-700)}
+.spectrum--dark .auth-page{--neon-background:var(--spectrum-gray-75);--neon-foreground:var(--spectrum-gray-900);--neon-card:var(--spectrum-gray-100);--neon-card-foreground:var(--spectrum-gray-900);--neon-popover:var(--spectrum-gray-100);--neon-popover-foreground:var(--spectrum-gray-900);--neon-muted:var(--spectrum-gray-200);--neon-muted-foreground:var(--spectrum-gray-700);--neon-border:var(--spectrum-gray-400);--neon-input:var(--spectrum-gray-300);--neon-primary:#f55f44;--neon-primary-foreground:#fff;--neon-secondary:var(--spectrum-gray-200);--neon-secondary-foreground:var(--spectrum-gray-900);--neon-ring:#ff7c65;--neon-radius:.625rem}
+.spectrum--dark .support :is(input,select,textarea){background:var(--spectrum-gray-100);border-color:var(--spectrum-gray-400);color:var(--spectrum-gray-900)}
+.spectrum--dark .support :is(input,textarea)::placeholder{color:var(--spectrum-gray-600)}
+footer .muted-brand{color:#b7b7b7}

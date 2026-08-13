@@ -1141,22 +1141,32 @@ function NotFound() {
     </Layout>
   );
 }
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+  return null;
+}
 export default function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/features" element={<Features />} />
-      <Route path="/catalog" element={<Catalog />} />
-      <Route path="/pricing" element={<Pricing />} />
-      <Route path="/safety" element={<Safety />} />
-      <Route path="/app" element={<WebTweaker />} />
-      <Route path="/download" element={<WebTweaker />} />
-      <Route path="/support" element={<Support />} />
-      <Route path="/status" element={<Status />} />
-      <Route path="/privacy" element={<Legal />} />
-      <Route path="/terms" element={<Legal terms />} />
-      <Route path="/auth/:pathname" element={<AuthPage />} />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/features" element={<Features />} />
+        <Route path="/catalog" element={<Catalog />} />
+        <Route path="/pricing" element={<Pricing />} />
+        <Route path="/safety" element={<Safety />} />
+        <Route path="/app" element={<WebTweaker />} />
+        <Route path="/download" element={<WebTweaker />} />
+        <Route path="/support" element={<Support />} />
+        <Route path="/status" element={<Status />} />
+        <Route path="/privacy" element={<Legal />} />
+        <Route path="/terms" element={<Legal terms />} />
+        <Route path="/auth/:pathname" element={<AuthPage />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </>
   );
 }
