@@ -1144,7 +1144,9 @@ function NotFound() {
 function ScrollToTop() {
   const { pathname } = useLocation();
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
   }, [pathname]);
   return null;
 }
