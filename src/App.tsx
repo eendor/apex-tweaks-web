@@ -966,8 +966,7 @@ function Support() {
           </p>
           <h3>Security issues</h3>
           <p>
-            Email security@apextweaks.app. Please do not publish an unpatched
-            vulnerability.
+            Email <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>. Please do not publish an unpatched vulnerability.
           </p>
         </aside>
       </section>
@@ -1046,7 +1045,7 @@ function Legal({ terms = false }: { terms?: boolean }) {
             <p>
               Support records are retained only while operationally necessary.
               You may request access or deletion by emailing
-              privacy@apextweaks.app.
+              <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>.
             </p>
             <h2>Cookies</h2>
             <p>
@@ -1057,7 +1056,7 @@ function Legal({ terms = false }: { terms?: boolean }) {
         )}
         <h2>Contact</h2>
         <p>
-          Questions can be sent to {terms ? "legal" : "privacy"}@apextweaks.app.
+          Questions can be sent to <a href="mailto:s.rgamartin@usm.edu.ph">s.rgamartin@usm.edu.ph</a>.
         </p>
       </article>
     </Layout>
