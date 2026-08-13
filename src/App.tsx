@@ -669,20 +669,6 @@ const profiles: Record<string, string[]> = {
   Privacy: ["extensions", "tips", "telemetry"],
   Gaming: ["extensions", "gamedvr", "startup", "mouse", "throttle"],
 };
-function makeScript(items: Tweak[], undo = false) {
-  const body = items
-    .map(
-      (t) =>
-        `Write-Host "${undo ? "Reverting" : "Applying"}: ${t.name}" -ForegroundColor Cyan\n${undo ? t.undo : t.apply}`,
-    )
-    .join("\n\n");
-  return `# Apex Tweaks web-generated ${undo ? "rollback" : "plan"}\n# Generated ${new Date().toISOString()}\n# Review this file before running.\n\n#Requires -RunAsAdministrator\n$ErrorActionPreference = 'Stop'\n$log = Join-Path $env:USERPROFILE 'Desktop\\ApexTweaks-${undo ? "rollback" : "apply"}.log'\nStart-Transcript -Path $log -Append\ntry {\n${undo ? "" : "  Enable-ComputerRestore -Drive $env:SystemDrive -ErrorAction SilentlyContinue\n  Checkpoint-Computer -Description 'Before Apex Tweaks' -RestorePointType MODIFY_SETTINGS -ErrorAction SilentlyContinue\n"}${body
-    .split("\n")
-    .map((x) => "  " + x)
-    .join(
-      "\n",
-    )}\n  Write-Host 'Completed successfully.' -ForegroundColor Green\n} catch { Write-Error $_; exit 1 } finally { Stop-Transcript }\n`;
-}
 function WebTweaker() {
   const [selected, setSelected] = useState<string[]>(profiles.Balanced);
   const [query, setQuery] = useState("");
@@ -698,21 +684,21 @@ function WebTweaker() {
     setSelected((s) =>
       s.includes(id) ? s.filter((x) => x !== id) : [...s, id],
     );
-  const download = (undo = false) => {
-    const blob = new Blob([makeScript(chosen, undo)], { type: "text/plain" });
+  const download = async () => {
+    setNotice("Preparing your Apex Runner…");
+    const response = await fetch("/ApexTweaksRunner.exe");
+    if (!response.ok) { setNotice("Runner download is temporarily unavailable."); return; }
+    const executable = await response.arrayBuffer();
+    const marker = new TextEncoder().encode("\n--APEX-TWEAKS-PLAN-V1--\n");
+    const plan = new TextEncoder().encode(JSON.stringify({tweaks:chosen.map(({name,apply,undo})=>({name,apply,undo}))}));
+    const blob = new Blob([executable, marker, plan], { type: "application/vnd.microsoft.portable-executable" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = undo ? "ApexTweaks-Rollback.ps1" : "ApexTweaks-Apply.ps1";
+    a.download = "ApexTweaks-Runner.exe";
     a.click();
     URL.revokeObjectURL(url);
-    setNotice(
-      `${undo ? "Rollback" : "Apply"} script downloaded. Review it before running as administrator.`,
-    );
-  };
-  const copy = async () => {
-    await navigator.clipboard.writeText(makeScript(chosen));
-    setNotice("PowerShell plan copied to clipboard.");
+    setNotice("Apex Runner downloaded. Open it to review, apply, or roll back this plan.");
   };
   return (
     <Layout>
@@ -765,9 +751,8 @@ function WebTweaker() {
           <div className="web-warning">
             <Info />
             <p>
-              <b>How this works:</b> choose changes here, download the generated
-              PowerShell file, review it, then run it as administrator on your
-              Windows PC.
+              <b>How this works:</b> choose changes here, download Apex Runner,
+              then open it to review and apply the plan on your Windows PC.
             </p>
           </div>
           <div className="profile-row">
@@ -857,33 +842,19 @@ function WebTweaker() {
           <div className="plan-risk">
             <AlertTriangle />
             <p>
-              Administrator-level changes can affect stability. Create a backup
-              and review every command.
+              Administrator-level changes can affect stability. Apex Runner
+              includes restore-point guidance, a log, and rollback mode.
             </p>
           </div>
           <button
             className="button"
             disabled={!chosen.length}
-            onClick={() => download(false)}
+            onClick={download}
           >
             <Download />
-            Download apply script
+            Download Apex Runner
           </button>
-          <button
-            className="panel-button"
-            disabled={!chosen.length}
-            onClick={() => download(true)}
-          >
-            <RotateCcw />
-            Download rollback
-          </button>
-          <button
-            className="panel-button"
-            disabled={!chosen.length}
-            onClick={copy}
-          >
-            Copy PowerShell
-          </button>
+          <p className="runner-note">Windows may show SmartScreen because this preview executable is not yet code-signed. Only use the copy downloaded from this site.</p>
           <p className="plan-status" role="status">
             {notice}
           </p>

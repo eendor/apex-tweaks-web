@@ -8,3 +8,6 @@ vite.config.js
 vite.config.d.ts
 netlify/functions/*.js
 netlify/functions/*.d.ts
+runner/bin
+runner/obj
+runner/publish

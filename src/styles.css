@@ -23,3 +23,4 @@ button,input,select,textarea{color:#101216}
 .app-workspace h1,.app-workspace h2,.app-workspace p,.app-workspace summary,.plan-panel h2,.plan-panel li{color:#202328}
 .app-sidebar,.app-sidebar button,.dark-cta,.trust,.console-card,footer{color:#fff}
 .auth-page{--neon-background:#fff;--neon-foreground:#17191d;--neon-card:#fff;--neon-card-foreground:#17191d;--neon-popover:#fff;--neon-popover-foreground:#17191d;--neon-muted:#eeeae2;--neon-muted-foreground:#64645f;--neon-border:#d2cdc3}
+.runner-note{font-size:10px!important;line-height:1.5!important;color:#686862!important;margin:12px 2px 0!important}
